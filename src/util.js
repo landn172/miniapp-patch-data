@@ -1,7 +1,6 @@
 export function joinPath(paths, prefix) {
   const chainPath = [prefix, ...paths].filter(path => {
     if (typeof path === 'number') return true
-    if (typeof path === 'boolean') return true
     return !!path
   })
   return chainPath.slice(1).reduce((str, path) => {
@@ -23,7 +22,7 @@ export function getTarget(obj, path) {
   while (index < len) {
     const tpath = paths[index]
     const matchs = tpath.match(arrReg)
-    if (matchs) {
+    if (matchs) {     
       const match = matchs.slice(1).filter(match => !!match)
       obj = getTarget(obj, match.join('.'))
     } else {

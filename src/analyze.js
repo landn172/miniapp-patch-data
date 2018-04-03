@@ -2,11 +2,12 @@ import DeepDiff from 'deep-diff'
 import mergeDiffs from './mergeDiffs'
 import { joinPath } from './util'
 
-export function analyzePatchs(lhs, rhs, prefix = '') {
+export function analyzePatchs(lhs, rhs, prefix = '', withoutMerge = false) {
   const diffs = DeepDiff(lhs, rhs)
   const opts = {
     lhs,
-    rhs
+    rhs,
+    withoutMerge
   }
   const patchs = analyzeDiff(mergeDiffs(diffs, opts), prefix, opts)
   return patchs
@@ -24,10 +25,8 @@ export function analyzeDiff(diffs, prefix, opts) {
   return mergePatchs(patchs, opts)
 }
 
-function mergePatchs(patchs, opts = {}) {
+function mergePatchs(patchs, opts) {
   const { lhs, rhs } = opts
-  // 如果没有源数据直接返回patchs
-  if (!lhs && !rhs) return patchs
   return patchs
 }
 

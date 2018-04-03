@@ -110,6 +110,23 @@ describe('change occurred within an array', () => {
     }
     expect(analyzePatchs(lhs, rhs)).toEqual([{ key: 'a', value: [] }])
   })
+
+  test('change occurred within an array - diff array', () => {
+    const lhs = {
+      a: [[{ a: 1, b: true }], { b: 1, c: 2 }],
+      b: [{ c: { d: [1, 2] } }]
+    }
+    const rhs = {
+      a: [[{ a: 2, b: false }], { b: 1 }],
+      b: [{ c: { d: [1] } }]
+    }
+    expect(analyzePatchs(lhs, rhs)).toEqual([
+      { key: 'b[0].c.d[1]', value: undefined },
+      { key: 'a[1].c', value: undefined },
+      { key: 'a[0][0].b', value: false },
+      { key: 'a[0][0].a', value: 2 }
+    ])
+  })
 })
 
 test('property/element was deleted', () => {
@@ -120,32 +137,12 @@ test('property/element was deleted', () => {
   expect(analyzePatchs(lhs, rhs)).toEqual([{ key: 'a', value: undefined }])
 })
 
-test('complex changes', () => {
+test('without merge:true', () => {
   const lhs = {
-    a: [1, 3],
-    b: {
-      c: {
-        d: 4,
-        f: 6
-      }
-    }
+    a: [1, 2]
   }
-  const rhs = {
-    a: [1, 2, 3],
-    b: {
-      c: {
-        e: 5,
-        f: 8
-      },
-      g: 2
-    }
-  }
-  expect(analyzePatchs(lhs, rhs)).toEqual([
-    { key: 'b.g', value: 2 },
-    { key: 'b.c.e', value: 5 },
-    { key: 'b.c.f', value: 8 },
-    { key: 'b.c.d', value: undefined },
-    { key: 'a[2]', value: 3 },
-    { key: 'a[1]', value: 2 }
+  const rhs = {}
+  expect(analyzePatchs(lhs, rhs, '', true)).toEqual([
+    { key: 'a', value: undefined }
   ])
 })

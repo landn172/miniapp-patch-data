@@ -6,6 +6,10 @@
 
 diff 两个数据差异，只设置需要改变的值，diff 库引用[deep-diff](https://www.npmjs.com/package/deep-diff)
 
+## NEXT v1.1.0
+
+diff库替换成 deep-object-diff
+
 ## example
 
 ```js

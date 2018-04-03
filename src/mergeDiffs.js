@@ -1,9 +1,9 @@
 import { joinPath, getTarget } from './util'
 
-export default function mergeDiffs(diffs, opts = {}) {
+export default function mergeDiffs(diffs, opts) {
   const { lhs, rhs, withoutMerge } = opts
   // diffs
-  if ((!lhs && !rhs) || !!withoutMerge) return diffs
+  if (!!withoutMerge) return diffs
 
   return walkDiffs(diffs, opts)
 }
