@@ -1,9 +1,9 @@
 import { joinPath, getTarget } from './util'
 
 export default function mergeDiffs(diffs, opts = {}) {
-  const { lhs, rhs } = opts
+  const { lhs, rhs, withoutMerge } = opts
   // diffs
-  if (!lhs && !rhs) return diffs
+  if ((!lhs && !rhs) || !!withoutMerge) return diffs
 
   return walkDiffs(diffs, opts)
 }
@@ -13,6 +13,7 @@ function walkDiffs(diffs, opts) {
   let len = diffs.length - 1
   let item
   const diffPaths = {}
+  // collect diff with same path
   while ((item = diffs[len])) {
     item = Object.assign({}, item, { _index: len })
     const path = joinPath(item.path)

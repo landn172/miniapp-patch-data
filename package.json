@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
+    "bench": "npx babel-node --presets babel-preset-env  ./benchmarks/mergediff.js",
     "publish":
       "yarn publish --registry https://registry.npmjs.org --access public"
   },
@@ -28,6 +29,7 @@
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
+    "benchmark": "^2.1.4",
     "jest": "^22.4.3",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",

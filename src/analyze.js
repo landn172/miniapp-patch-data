@@ -4,17 +4,11 @@ import { joinPath } from './util'
 
 export function analyzePatchs(lhs, rhs, prefix = '') {
   const diffs = DeepDiff(lhs, rhs)
-  const patchs = analyzeDiff(
-    mergeDiffs(diffs, {
-      lhs,
-      rhs
-    }),
-    prefix,
-    {
-      lhs,
-      rhs
-    }
-  )
+  const opts = {
+    lhs,
+    rhs
+  }
+  const patchs = analyzeDiff(mergeDiffs(diffs, opts), prefix, opts)
   return patchs
 }
 
