@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "publish":
+      "yarn publish --registry https://registry.npmjs.org --access public"
   },
   "dependencies": {
     "deep-diff": "^0.3.8"
@@ -15,6 +17,12 @@
       "^.+\\.js": "babel-jest"
     }
   },
+  "author": {
+    "email": "landn172@gmail.com",
+    "name": "landn172"
+  },
+  "homepage": "https://github.com/landn172/miniapp-patch-data",
+  "keywords": ["miniapp", "patch", "data"],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.3",
