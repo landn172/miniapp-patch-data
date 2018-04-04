@@ -1,5 +1,8 @@
 # miniapp-patch-data
 
+[![Build Status](https://travis-ci.org/landn172/miniapp-patch-data.svg?branch=master)](https://travis-ci.org/landn172/miniapp-patch-data)
+[![codecov](https://codecov.io/gh/landn172/miniapp-patch-data/branch/master/graph/badge.svg)](https://codecov.io/gh/landn172/miniapp-patch-data)
+
 目的是为了减少小程序 setData 时 data 的大小，尤其是对长数组优化。
 
 ## 原理

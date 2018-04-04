@@ -6,13 +6,17 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
-    "bench": "npx babel-node --presets babel-preset-env ./benchmarks/analyze.js",
-    "publish": "yarn publish --registry https://registry.npmjs.org --access public"
+    "bench":
+      "npx babel-node --presets babel-preset-env ./benchmarks/analyze.js",
+    "publish":
+      "yarn publish --registry https://registry.npmjs.org --access public"
   },
   "dependencies": {
     "deep-object-diff": "^1.1.0"
   },
   "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
     "transform": {
       "^.+\\.js": "babel-jest"
     }
@@ -22,11 +26,7 @@
     "name": "landn172"
   },
   "homepage": "https://github.com/landn172/miniapp-patch-data",
-  "keywords": [
-    "miniapp",
-    "patch",
-    "data"
-  ],
+  "keywords": ["miniapp", "patch", "data"],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.3",
