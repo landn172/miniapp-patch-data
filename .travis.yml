@@ -1,0 +1,20 @@
+lansguage: node_js
+node_js: stable
+branchs:
+  only:
+  -master
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+before_install:
+  - npm install -g yarn --cache-min 999999999
+install:
+- yarn
+script:
+- yarn run test
+cache: yarn
