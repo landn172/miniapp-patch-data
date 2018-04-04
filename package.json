@@ -8,7 +8,8 @@
     "test": "jest",
     "bench":
       "npx babel-node --presets babel-preset-env ./benchmarks/analyze.js",
-    "publish":
+    "prepublish": "yarn run test",
+    "release":
       "yarn publish --registry https://registry.npmjs.org --access public"
   },
   "dependencies": {
