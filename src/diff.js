@@ -28,9 +28,10 @@ function walkObject(obj, paths, patchs) {
 function preprocess(lhs, rhs, prefix) {
   const result = {}
   walk(lhs, rhs, [prefix])
+  walk(rhs, lhs, [prefix], true)
   return { l: lhs, r: rhs, preresult: result }
-  // 把rhs为空数组或者空对象的单独处理
-  function walk(l, r, paths) {
+  // 把rhs/lhs同类型 为空数组或者空对象的单独处理
+  function walk(l, r, paths, isReverse = false) {
     Object.keys(r).forEach(key => {
       if (!l.hasOwnProperty(key)) return
       const npaths = paths.concat(key)
@@ -38,19 +39,19 @@ function preprocess(lhs, rhs, prefix) {
       const rk = r[key]
       if (Array.isArray(lk) && isEmptyArray(rk)) {
         const pathStr = joinPath(npaths)
-        result[pathStr] = []
+        result[pathStr] = isReverse ? lk : rk
         delete l[key]
         delete r[key]
         return
       }
       if (isObject(lk) && isEmptyObject(rk)) {
         const pathStr = joinPath(npaths)
-        result[pathStr] = {}
+        result[pathStr] = isReverse ? lk : rk
         delete l[key]
         delete r[key]
         return
       }
-      walk(lk, rk, npaths)
+      walk(lk, rk, npaths, isReverse)
     })
   }
 }

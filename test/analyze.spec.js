@@ -21,7 +21,7 @@ describe('added property/element', () => {
     expect(analyzePatchs(lhs, rhs, prefix)).toEqual({ 'data.b': 2 })
   })
 
-  test('array', () => {
+  test('array original: undefined', () => {
     const lhs = {
       a: 1
     }
@@ -32,6 +32,37 @@ describe('added property/element', () => {
     }
 
     expect(analyzePatchs(lhs, rhs)).toEqual({ b: [2, 3, 4] })
+  })
+
+  test('array original: empty array', () => {
+    const lhs = {
+      b: []
+    }
+
+    const rhs = {
+      b: [2, 3, 4]
+    }
+
+    expect(analyzePatchs(lhs, rhs)).toEqual({ b: [2, 3, 4] })
+  })
+
+  test('object original: empty object', () => {
+    const lhs = {
+      a: {}
+    }
+
+    const rhs = {
+      a: {
+        b: 1,
+        c: 2
+      }
+    }
+    expect(analyzePatchs(lhs, rhs)).toEqual({
+      a: {
+        b: 1,
+        c: 2
+      }
+    })
   })
 })
 
