@@ -7,7 +7,7 @@ before_install:
   - npm install -g yarn --cache-min 999999999
   - npm install -g codecov
 install:
-- yarn
+- yarn install --no-lockfile
 script:
 - yarn run test
 - codecov -t $uploadtoken
